@@ -14,6 +14,8 @@ const guessField = document.querySelector(".guessField");
 
 let guessCount = 1;
 let resetButton;
+guessField.focus();
+
 
 
 function checkGuess() {
@@ -55,8 +57,6 @@ function setGameOver() {
       guessField.disabled = true;
       guessSubmit.disabled = true;
       resetButton = document.createElement("button");
-      testing = document.createElement("h1");
-      testing.textContent = "Wassup";
       resetButton.textContent = "Start new game";
       document.body.append(resetButton);
       resetButton.addEventListener("click", resetGame);
@@ -65,5 +65,22 @@ function setGameOver() {
 function resetGame() {
       guessCount = 1;
 
+      //resultParas is the class of the div that holds guesses,
+      //lastResult, and lowOrHi
+      const resetParas = document.querySelectorAll(".resultParas p")//selects all the paragraphs inside resultParas class
+      for(let i = 0; i < resetParas.length; i++) { //loop through all paragraphs
+        resetParas[i].textContent = "";
+      }
+
+      resetButton.parentNode.removeChild(resetButton);
+
+      guessField.disabled = false;
+      guessSubmit.disabled = false;
+      guessField.value = "";
+      guessField.focus();
+
+      lastResult.style.backgroundColor = 'white';
+
+      randomNumber = Math.floor(Math.random() * 100) + 1;
 }
     
